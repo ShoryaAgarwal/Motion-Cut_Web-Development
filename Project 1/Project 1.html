@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Price Landing Page</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <style>
+    body {
+      font-family: Times New Roman;
+      font-size: 17px;
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(45deg, #4CAF50, #2196F3);
+      color: #fff;
+    }
+
+    ul li{
+       list-style-type: square;
+       text-align: left;
+       margin-bottom: 10px;
+    }
+
+    a {
+      text-decoration: none;
+    }
+
+    header {
+      background: rgba(0, 0, 0, 0.7);
+      color: #fff;
+      text-align: center;
+      padding: 20px;
+    }
+
+    .pricing-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: stretch;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .pricing-card {
+      flex: 1;
+      border: 1px solid rgba(255, 255, 255, 0.5);
+      border-radius: 10px;
+      margin: 20px;
+      padding: 20px;
+      text-align: center;
+      background: rgba(255, 255, 255, 0.1);
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      transition: transform 0.3s ease;
+      cursor: pointer;
+      overflow: hidden;
+    }
+
+    .pricing-card:hover {
+      transform: scale(1.05);
+    }
+
+    .active {
+      background: rgba(255, 255, 255, 0.9);
+      color: #333;
+    }
+
+    .pricing-icon {
+      font-size: 2rem;
+      margin-bottom: 10px;
+    }
+
+    .toggle-container {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 20px;
+    }
+
+    .toggle-label {
+      margin: 0 10px;
+      cursor: pointer;
+      color: #fff;
+    }
+
+    input[type="checkbox"] {
+      display: none;
+    }
+
+    input[type="checkbox"] + label {
+      background: rgba(255, 25, 25);
+      padding: 10px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    input[type="checkbox"]:checked + label {
+      background: #4CAF50;
+      color: white;
+    }
+
+    @media (max-width: 768px) {
+      .pricing-card {
+        flex: 1 0 100%;
+      }
+    }
+
+	.plan-button1,
+	.plan-button2,
+	.plan-button3 {
+  		color: #fff;
+  		padding: 10px 50px;
+  		border-radius: 15px;
+  		cursor: pointer;
+  		margin-top: 10px;
+  		font-weight: 600px;
+  		width: 190px;
+  		text-align: center;
+  		box-shadow: 0 5px #999;
+	}
+
+	.plan-button1 {
+  		background-color: blue;
+	}
+
+  </style>
+</head>
+<body>
+  <header>
+    <h1>CarHorn Radio Show Newsletter</h1>
+    <h3>Become part of the CarHorn community and get our weekly newsletter packed with exclusive advice and news!</h3>
+     <marquee>
+     <font color = "Orange">
+     !!! Never miss the latest from CarHorn !!!
+     </font>
+     </marquee>
+  </header>
+
+  <div class="pricing-container">
+    <div class="pricing-card">
+      <i class="fas fa-star pricing-icon"></i>
+      <h2><u>Basic Plan</u></h2>
+      <ul>
+	<li>Alerts on Car Incentives</li>
+        <li>Latest Updates in Auto Industry</li>
+        <li>Basic Help</li>
+      </ul>
+      <br><br><br><br><br>
+      <p class="price" id="basic-price">$10</p>
+      <a class="plan-button1">Buy Now</a>
+    </div>
+
+    <div class="pricing-card">
+      <i class="fas fa-gem pricing-icon"></i>
+      <h2><u>Pro Plan</u></h2>
+      <ul>
+	<li>Alerts on Car Incentives</li>
+        <li>Latest Updates in Auto Industry</li>
+	<li>Immediate Access to Vehicle Reviews</li>
+        <li>Pro Assistance</li>
+      </ul>
+      <br><br><br><br>
+      <p class="price" id="pro-price">$20</p>
+      <a class="plan-button1">Buy Now</a>
+    </div>
+
+    <div class="pricing-card">
+      <i class="fas fa-crown pricing-icon"></i>
+      <h2><u>Enterprise Plan</u></h2>
+      <ul>
+	<li>Alerts on Car Incentives</li>
+        <li>Latest Updates in Auto Industry</li>
+	<li>Exclusive Discounts to Products</li>
+	<li>Expert Advice to Get Most Out of Car</li>
+        <li>Immediate Access to Vehicle Reviews</li>
+        <li>And Much More...</li>
+      </ul>
+      <br>
+      <p class="price" id="enterprise-price">$30</p>
+      <a class="plan-button1">Buy Now</a>
+    </div>
+  </div>
+	<center>
+	<font color = "Purple">
+	The above-mentioned plans are on a monthly basis. To get yearly plans, click down below.
+	</font>
+	</center>
+	<br>
+
+  <div class="toggle-container">
+    <input type="checkbox" id="toggle" />
+    <label for="toggle" class="toggle-label">Yearly Billing</label>
+  </div>
+
+  <script>
+    const toggle = document.getElementById('toggle');
+    const prices = {
+      basic: [10, 110],
+      pro: [20, 200],
+      enterprise: [30, 270]
+    };
+
+    toggle.addEventListener('change', () => {
+      const monthlyPrices = Object.values(prices).map(price => price[0]);
+      const yearlyPrices = Object.values(prices).map(price => price[1]);
+
+      const updatePrices = (isChecked) => {
+        document.querySelectorAll('.price').forEach((element, index) => {
+          element.textContent = isChecked ? `$${yearlyPrices[index]}` : `$${monthlyPrices[index]}`;
+        });
+      };
+
+      updatePrices(toggle.checked);
+    });
+  </script>
+</body>
+</html>
